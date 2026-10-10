@@ -1,0 +1,77 @@
+%  Logical knowledge rules for player archetypes and playstyles
+%
+%  Input facts  : the base graph, one fact per triple, e.g.  has_PTS("doncilu01", 33.5).
+%  Output       : derived triples (player, predicate, object) listed in the .output lines.
+%  Syntax       : Datalog with comparisons and arithmetic
+
+.output has_archetype, has_archetype_family, has_position_group
+.output has_scoring_tier, has_playmaking_tier, has_rebounding_tier
+.output has_three_point_tier, has_defensive_tier, has_role_tier
+
+%  1. Archetypes
+has_archetype(P, "EliteScorer")        :- has_PTS(P, X), X >= 20.0.
+has_archetype(P, "PrimaryPlaymaker")   :- has_AST(P, X), X >= 6.7.
+has_archetype(P, "GlassCleaner")       :- has_TRB(P, X), X >= 8.8.
+has_archetype(P, "PerimeterThreat")    :- has_3P(P, M), has_3P_pct(P, Pct), M >= 2.5, Pct >= 0.388.
+has_archetype(P, "RimProtector")       :- has_BLK(P, X), X >= 1.0.
+has_archetype(P, "LockdownDefender")   :- has_STL(P, X), X >= 1.2.
+has_archetype(P, "OffensiveInitiator") :- has_AST(P, A), has_TOV(P, T), A >= 4.5, T <= 2.3.
+has_archetype(P, "EfficientFinisher")  :- has_FG_pct(P, X), X >= 0.577.
+has_archetype(P, "StretchBig")         :- has_TRB(P, R), has_3P(P, M), has_Pos(P, "C"),  R >= 6.6, M >= 1.3.
+has_archetype(P, "StretchBig")         :- has_TRB(P, R), has_3P(P, M), has_Pos(P, "PF"), R >= 6.6, M >= 1.3.
+has_archetype(P, "VolumeShooter")      :- has_3PA(P, X), X >= 6.0.
+has_archetype(P, "TwoWayStar")         :- has_PTS(P, Pts), has_STL(P, S), Pts >= 15.0, S >= 1.0.
+has_archetype(P, "OffensiveBoarder")   :- has_ORB(P, X), X >= 2.4.
+
+%  2. Taxonomy of archetypes: subclass_of is transitive -> recursive rule
+subclass_of("EliteScorer", "Scoring").
+subclass_of("VolumeShooter", "Scoring").
+subclass_of("PerimeterThreat", "Scoring").
+subclass_of("EfficientFinisher", "Scoring").
+subclass_of("StretchBig", "Scoring").
+subclass_of("TwoWayStar", "Scoring").
+subclass_of("PrimaryPlaymaker", "Playmaking").
+subclass_of("OffensiveInitiator", "Playmaking").
+subclass_of("GlassCleaner", "Rebounding").
+subclass_of("OffensiveBoarder", "Rebounding").
+subclass_of("StretchBig", "Rebounding").
+subclass_of("RimProtector", "Defense").
+subclass_of("LockdownDefender", "Defense").
+subclass_of("TwoWayStar", "Defense").
+subclass_of("Scoring", "OffensiveSkill").
+subclass_of("Playmaking", "OffensiveSkill").
+
+subclass_of(A, C) :- subclass_of(A, B), subclass_of(B, C).
+has_archetype_family(P, F) :- has_archetype(P, A), subclass_of(A, F).
+
+%  3. Position groups
+has_position_group(P, "Guard") :- has_Pos(P, "PG").
+has_position_group(P, "Guard") :- has_Pos(P, "SG").
+has_position_group(P, "Wing")  :- has_Pos(P, "SF").
+has_position_group(P, "Big")   :- has_Pos(P, "PF").
+has_position_group(P, "Big")   :- has_Pos(P, "C").
+
+%  4. Skill tiers
+has_scoring_tier(P, "High") :- has_PTS(P, X), X >= 12.0.
+has_scoring_tier(P, "Mid")  :- has_PTS(P, X), X >= 7.0, X < 12.0.
+has_scoring_tier(P, "Low")  :- has_PTS(P, X), X < 7.0.
+
+has_playmaking_tier(P, "High") :- has_AST(P, X), X >= 3.0.
+has_playmaking_tier(P, "Mid")  :- has_AST(P, X), X >= 1.5, X < 3.0.
+has_playmaking_tier(P, "Low")  :- has_AST(P, X), X < 1.5.
+
+has_rebounding_tier(P, "High") :- has_TRB(P, X), X >= 5.0.
+has_rebounding_tier(P, "Mid")  :- has_TRB(P, X), X >= 3.0, X < 5.0.
+has_rebounding_tier(P, "Low")  :- has_TRB(P, X), X < 3.0.
+
+has_three_point_tier(P, "High") :- has_3PA(P, X), X >= 4.5.
+has_three_point_tier(P, "Mid")  :- has_3PA(P, X), X >= 2.5, X < 4.5.
+has_three_point_tier(P, "Low")  :- has_3PA(P, X), X < 2.5.
+
+has_defensive_tier(P, "High") :- has_STL(P, A), has_BLK(P, B), S = A + B, S >= 1.5.
+has_defensive_tier(P, "Mid")  :- has_STL(P, A), has_BLK(P, B), S = A + B, S >= 0.9, S < 1.5.
+has_defensive_tier(P, "Low")  :- has_STL(P, A), has_BLK(P, B), S = A + B, S < 0.9.
+
+has_role_tier(P, "Starter")  :- has_MP(P, X), X >= 27.0.
+has_role_tier(P, "Rotation") :- has_MP(P, X), X >= 19.0, X < 27.0.
+has_role_tier(P, "Bench")    :- has_MP(P, X), X < 19.0.

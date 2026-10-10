@@ -1,0 +1,80 @@
+{
+  "new_rules": {
+    "file": "rules/rules_v2_extension.dl",
+    "rules_added": 3,
+    "facts_inferred": 88,
+    "seconds": 0.0327
+  },
+  "new_players": {
+    "file": "data/new_players_demo.csv",
+    "players": [
+      "democen01",
+      "demosha01",
+      "demoswi01"
+    ],
+    "base_triples": 87,
+    "facts_inferred": 45,
+    "seconds": 0.0027
+  },
+  "kg": {
+    "triples_before": 16152,
+    "triples_added": 218,
+    "triples_after": 16370,
+    "added_by_predicate": {
+      "has_archetype": 60,
+      "has_archetype_family": 50,
+      "has_Team": 3,
+      "has_Player": 3,
+      "has_Age": 3,
+      "has_Pos": 3,
+      "has_G": 3,
+      "has_MP": 3,
+      "has_FG": 3,
+      "has_FGA": 3,
+      "has_FG_pct": 3,
+      "has_3P": 3,
+      "has_3PA": 3,
+      "has_3P_pct": 3,
+      "has_2P": 3,
+      "has_2PA": 3,
+      "has_2P_pct": 3,
+      "has_eFG_pct": 3,
+      "has_FT": 3,
+      "has_FTA": 3,
+      "has_FT_pct": 3,
+      "has_ORB": 3,
+      "has_DRB": 3,
+      "has_TRB": 3,
+      "has_AST": 3,
+      "has_STL": 3,
+      "has_BLK": 3,
+      "has_TOV": 3,
+      "has_PF": 3,
+      "has_PTS": 3,
+      "has_Player_additional": 3,
+      "has_defensive_tier": 3,
+      "has_playmaking_tier": 3,
+      "has_position_group": 3,
+      "has_rebounding_tier": 3,
+      "has_role_tier": 3,
+      "has_scoring_tier": 3,
+      "has_three_point_tier": 3
+    }
+  },
+  "verified_equal_to_full_recomputation": true,
+  "inductive_self_test_on_existing_players": {
+    "n": 100,
+    "hits@1": 0.28,
+    "hits@5": 0.78,
+    "mean_rank": 4.52
+  },
+  "embeddings": {
+    "new_entities_embedded": [
+      "ThreeAndD",
+      "PointForward",
+      "demosha01",
+      "democen01",
+      "demoswi01"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "model": "TransE",
+  "embedding_dim": 64,
+  "num_epochs": 200,
+  "batch_size": 256,
+  "seed": 42,
+  "num_triples": 4341,
+  "num_entities": 451,
+  "num_relations": 10,
+  "trained_at": "2026-09-30T08:52:36+00:00",
+  "evolved_from": "artifacts",
+  "entities_added_inductively": [
+    "ThreeAndD",
+    "PointForward",
+    "demosha01",
+    "democen01",
+    "demoswi01"
+  ]
+}

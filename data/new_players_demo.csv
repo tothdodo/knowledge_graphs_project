@@ -1,0 +1,4 @@
+Rk,Player,Age,Team,Pos,G,GS,MP,FG,FGA,FG%,3P,3PA,3P%,2P,2PA,2P%,eFG%,FT,FTA,FT%,ORB,DRB,TRB,AST,STL,BLK,TOV,PF,PTS,Awards,Player-additional
+1,Demo Sharpshooter (hypothetical),22,NYK,SG,60,30,27.5,5.0,11.5,0.435,3.1,7.6,0.408,1.9,3.9,0.487,0.57,2.0,2.3,0.87,0.4,2.8,3.2,2.6,1.2,0.4,1.3,2.0,15.1,,demosha01
+2,Demo Center (hypothetical),23,SAS,C,65,65,28.0,4.6,7.0,0.657,0.0,0.1,0.0,4.6,6.9,0.667,0.657,2.5,3.6,0.69,3.3,6.6,9.9,1.4,0.7,2.1,1.6,2.9,11.7,,democen01
+3,Demo Point Forward (hypothetical),25,POR,SF,70,70,33.0,6.0,13.0,0.462,1.4,4.0,0.35,4.6,9.0,0.511,0.516,3.6,4.7,0.766,1.0,6.4,7.4,6.1,1.2,0.6,3.0,2.2,17.0,,demoswi01

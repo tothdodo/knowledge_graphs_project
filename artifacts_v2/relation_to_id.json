@@ -1,0 +1,12 @@
+{
+  "has_Pos": 0,
+  "has_archetype": 1,
+  "has_archetype_family": 2,
+  "has_defensive_tier": 3,
+  "has_playmaking_tier": 4,
+  "has_position_group": 5,
+  "has_rebounding_tier": 6,
+  "has_role_tier": 7,
+  "has_scoring_tier": 8,
+  "has_three_point_tier": 9
+}

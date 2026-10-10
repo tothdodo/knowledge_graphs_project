@@ -1,0 +1,12 @@
+%  Evolution rules: Two new archetypes added on top of playstyle_rules.dl.
+.output has_archetype, has_archetype_family
+
+has_archetype(P, "ThreeAndD") :- has_3P(P, M), has_3P_pct(P, Pct), has_STL(P, A), has_BLK(P, B),
+                                 S = A + B, M >= 1.5, Pct >= 0.36, S >= 1.5.
+has_archetype(P, "PointForward") :- has_Pos(P, "SF"), has_AST(P, A), has_TRB(P, R), A >= 4.0, R >= 6.0.
+has_archetype(P, "PointForward") :- has_Pos(P, "PF"), has_AST(P, A), has_TRB(P, R), A >= 4.0, R >= 6.0.
+
+subclass_of("ThreeAndD", "Scoring").
+subclass_of("ThreeAndD", "Defense").
+subclass_of("PointForward", "Playmaking").
+subclass_of("PointForward", "Rebounding").
